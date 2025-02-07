@@ -29,6 +29,8 @@ public partial class ComponentMove : Node3D
 			playerNode.MaxSpeed,
 			playerNode.LinearVelocity);
 
+		GD.Print(force);
+
 		EmitSignal(SignalName.ForceSignal, force);
 	}
 
@@ -48,6 +50,9 @@ public partial class ComponentMove : Node3D
 	private Vector3 CalculateMovementForce(Vector3 direction, float accel,
 		float mass, float maxSpeed, Vector3 linearVelocity)
 	{
+		var verticalComponentOfLinearVelocity = linearVelocity.Dot(Vector3.Up) * Vector3.Up;
+		linearVelocity -= verticalComponentOfLinearVelocity;
+		
 		var targetVelocity = direction * maxSpeed;
 		var targetDirection = (targetVelocity - linearVelocity).Normalized();
 		

@@ -24,23 +24,30 @@ public partial class ComponentHover : Node3D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		
 		world = GetWorld3D().DirectSpaceState;
 		CastGroundRay();
 
-		var springOffset = playerNode.SpringHeight - groundDistance;
+        if (groundDistance > playerNode.TargetRestingHeight) return;
+
+        var targetSpringHeight = CalculateDesiredSpringHeight(
+			playerNode.TargetRestingHeight,
+			playerNode.SpringStrength);
+        var springOffset = targetSpringHeight - groundDistance;
 		var force = CalculateSpringForce(playerNode.SpringStrength,
 			playerNode.DampStrength,
 			springOffset,
 			playerNode.LinearVelocity,
 			Vector3.Up);
 
-		EmitSignal(SignalName.ForceSignal, force);
+        //GD.Print(groundDistance);
+
+        EmitSignal(SignalName.ForceSignal, force);
 	}
 
 	private void CastGroundRay()
 	{
-		var rayQuery = PhysicsRayQueryParameters3D.Create(GlobalPosition, GlobalPosition + new Vector3(0f, -10f, 0f));
+		var rayQuery = PhysicsRayQueryParameters3D.Create(GlobalPosition,
+			GlobalPosition + new Vector3(0f, -10f, 0f));
 		rayQuery.Exclude = new Godot.Collections.Array<Rid> { playerNode.GetRid() };
 		var collision = world.IntersectRay(rayQuery);
 
@@ -50,9 +57,12 @@ public partial class ComponentHover : Node3D
 			Vector3 distance = (GlobalPosition - collisionPosition);
 			groundDistance = distance.Length();
 		}
+
+		
 	}
 
-	private Vector3 CalculateSpringForce(float springStrength, float dampStrength, float offset, Vector3 linearVelocity, Vector3 springDirection)
+	private Vector3 CalculateSpringForce(float springStrength, float dampStrength,
+		float offset, Vector3 linearVelocity, Vector3 springDirection)
 	{
 		var velocity = linearVelocity.Dot(springDirection.Normalized());
 		velocity = springDirection.Normalized().Dot(linearVelocity);
@@ -66,5 +76,17 @@ public partial class ComponentHover : Node3D
 		//GD.Print(forceVector, " ", velocity, " ", offset, " ", GlobalPosition);
 
 		return forceVector;
+	}
+
+	private float CalculateDesiredSpringHeight(float targetRestingHeight, float springStrength)
+	{
+		var gravityStrength = (float)(ProjectSettings.GetSetting("physics/3d/default_gravity"));
+
+		var restingOffset = gravityStrength / springStrength;
+		var targetSpringHeight = targetRestingHeight + restingOffset;
+
+		GD.Print(restingOffset, " ", groundDistance);
+
+		return targetSpringHeight;
 	}
 }

@@ -34,7 +34,8 @@ axis_lock_angular_x = true
 axis_lock_angular_z = true
 inertia = Vector3(0.1, 0.1, 0.1)
 can_sleep = false
-springStrength = 100.0
+springStrength = 50.0
+dampStrength = 13.475
 accel = 42.615
 maxSpeed = 2.945
 

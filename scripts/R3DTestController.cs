@@ -8,7 +8,7 @@ public partial class R3DTestController : RigidBody3D
 	PhysicsDirectSpaceState3D world;
 
 	public float groundDistance = 0f;
-	[Export] float springHeight = 2f;
+	[Export] float targetRestingHeight = 2f;
 	[Export] float springStrength = 30f;
 	[Export] float dampStrength = 5f;
 	[Export] float accel = 1f;
@@ -29,7 +29,7 @@ public partial class R3DTestController : RigidBody3D
 	public float MaxSpeed { get { return maxSpeed; } }
 	public Vector3 EyeHeight { get { return eyeHeightTransform.GlobalPosition; } }
 	
-	public float SpringHeight { get { return springHeight; } }
+	public float TargetRestingHeight { get { return targetRestingHeight; } }
 	public float SpringStrength { get { return springStrength; } }
 	public float DampStrength { get { return dampStrength; } }
 
