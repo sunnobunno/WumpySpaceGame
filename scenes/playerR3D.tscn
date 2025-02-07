@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://bqbuk4ndoutim"]
+
+[ext_resource type="Script" path="res://scripts/R3DTestController.cs" id="1_4rury"]
+[ext_resource type="Script" path="res://scripts/PlayerComponents/ComponentRotateToMouse.cs" id="2_c68xh"]
+[ext_resource type="Script" path="res://scripts/PlayerComponents/ComponentMove.cs" id="3_by2to"]
+[ext_resource type="Script" path="res://scripts/PlayerComponents/ComponentHover.cs" id="4_rki4u"]
+[ext_resource type="Script" path="res://scripts/PlayerComponents/ComponentShooting.cs" id="5_2e6t2"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_3ebml"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_27cs8"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_propw"]
+
+[node name="Player" type="RigidBody3D" node_paths=PackedStringArray("rotateToMouseComponent", "moveComponent", "hoverComponent", "eyeHeightTransform")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.43379, 0)
+center_of_mass_mode = 1
+script = ExtResource("1_4rury")
+springStrength = 29.045
+rotateToMouseComponent = NodePath("ComponentRotateToMouse")
+moveComponent = NodePath("ComponentMove")
+hoverComponent = NodePath("ComponentHover")
+eyeHeightTransform = NodePath("EyeHeight")
+
+[node name="ComponentRotateToMouse" type="Node3D" parent="."]
+script = ExtResource("2_c68xh")
+
+[node name="ComponentMove" type="Node3D" parent="."]
+script = ExtResource("3_by2to")
+
+[node name="ComponentHover" type="Node3D" parent="."]
+script = ExtResource("4_rki4u")
+
+[node name="ComponentShooting" type="Node3D" parent="."]
+script = ExtResource("5_2e6t2")
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="Body" type="MeshInstance3D" parent="Model"]
+mesh = SubResource("CapsuleMesh_3ebml")
+skeleton = NodePath("")
+
+[node name="Eyes" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(0.658867, 0, 0, 0, 0.189571, 0, 0, 0, 0.243975, 0, 0.448171, 0.463328)
+mesh = SubResource("BoxMesh_27cs8")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_propw")
+
+[node name="EyeHeight" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.461253, 0)

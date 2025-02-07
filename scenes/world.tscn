@@ -1,0 +1,108 @@
+[gd_scene load_steps=8 format=3 uid="uid://b22e2cxtfkc7e"]
+
+[ext_resource type="PackedScene" uid="uid://bqbuk4ndoutim" path="res://scenes/playerR3D.tscn" id="1_6240u"]
+[ext_resource type="Script" path="res://scripts/MouseRaycaster.cs" id="1_jnwm7"]
+[ext_resource type="Script" path="res://scripts/CameraController.cs" id="1_l7yrf"]
+[ext_resource type="Script" path="res://scripts/CameraDolly.cs" id="1_q207n"]
+[ext_resource type="Script" path="res://scripts/Test.cs" id="3_sa5vb"]
+[ext_resource type="PackedScene" uid="uid://cmhwjx2mc7ibw" path="res://scenes/living_quarters.tscn" id="5_21m8y"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_1dbo8"]
+
+[node name="World" type="Node3D"]
+
+[node name="CameraDolly" type="Node3D" parent="." node_paths=PackedStringArray("followNode")]
+script = ExtResource("1_q207n")
+followNode = NodePath("../Player")
+acceleration = 1.495
+
+[node name="Camera3D" type="Camera3D" parent="CameraDolly" groups=["Camera"]]
+transform = Transform3D(0.717545, -0.29702, 0.630007, -3.72529e-09, 0.904517, 0.426438, -0.696513, -0.305989, 0.649031, 7.77655, 6.30053, 7.39391)
+projection = 1
+fov = 23.0
+size = 7.879
+script = ExtResource("1_l7yrf")
+rotX = -29.85
+
+[node name="MouseRaycaster" type="Node3D" parent="CameraDolly/Camera3D" node_paths=PackedStringArray("camera3D")]
+script = ExtResource("1_jnwm7")
+camera3D = NodePath("..")
+
+[node name="Player" parent="." groups=["Player"] instance=ExtResource("1_6240u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 1.434, 0)
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+inertia = Vector3(0.1, 0.1, 0.1)
+can_sleep = false
+springStrength = 100.0
+accel = 42.615
+maxSpeed = 2.945
+
+[node name="MousePointer" type="RigidBody3D" parent="." node_paths=PackedStringArray("controller")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.64927, 0.751382, 2.91959)
+visible = false
+gravity_scale = 0.0
+can_sleep = false
+script = ExtResource("3_sa5vb")
+controller = NodePath("../Player")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MousePointer"]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
+mesh = SubResource("SphereMesh_1dbo8")
+
+[node name="LivingQuarters" parent="." instance=ExtResource("5_21m8y")]
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights"]
+transform = Transform3D(0.370125, 0.91828, -0.140601, -0.294296, 0.259457, 0.919822, 0.881134, -0.299071, 0.366278, 0, 4.83195, -6.27185)
+light_color = Color(0.887173, 1, 0.91143, 1)
+light_energy = 0.613
+shadow_enabled = true
+shadow_transmittance_bias = -5.369
+shadow_blur = 1.323
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(0.819744, -0.0664667, -0.56886, 0.559122, 0.308097, 0.769713, 0.124104, -0.94903, 0.289724, -5.91094, 3.41953, 4.48432)
+light_color = Color(1, 0.690895, 0.622484, 1)
+light_energy = 10.806
+light_indirect_energy = 1.83
+shadow_enabled = true
+spot_range = 5.05439
+spot_attenuation = 0.68
+spot_angle = 58.85
+spot_angle_attenuation = 1.23114
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.26769, 4.04316, -1.191)
+light_color = Color(0.576933, 0.490309, 1.92523e-07, 1)
+light_energy = 10.806
+light_indirect_energy = 1.83
+shadow_enabled = true
+spot_range = 6.89324
+spot_attenuation = 0.68
+spot_angle = 77.7984
+spot_angle_attenuation = 1.23114
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(-0.240585, 0.948734, -0.204993, 0.559122, 0.308097, 0.769713, 0.793411, 0.0705656, -0.604582, -8.81916, 3.41953, -8.18051)
+light_color = Color(1, 0.690895, 0.622484, 1)
+light_energy = 10.806
+light_indirect_energy = 1.83
+shadow_enabled = true
+spot_range = 5.05439
+spot_attenuation = 0.68
+spot_angle = 58.85
+spot_angle_attenuation = 1.23114
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(-0.927902, 0.353969, 0.117064, 0.23387, 0.308097, 0.922161, 0.29035, 0.883053, -0.368666, 3.54761, 3.41953, -3.89633)
+light_color = Color(1, 0.690895, 0.622484, 1)
+light_energy = 9.387
+light_indirect_energy = 0.798
+light_volumetric_fog_energy = 1.516
+shadow_enabled = true
+spot_range = 5.05439
+spot_attenuation = 0.68
+spot_angle = 73.6356
+spot_angle_attenuation = 1.23114
