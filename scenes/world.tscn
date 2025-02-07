@@ -36,7 +36,7 @@ inertia = Vector3(0.1, 0.1, 0.1)
 can_sleep = false
 springStrength = 50.0
 dampStrength = 13.475
-accel = 42.615
+accel = 8.56
 maxSpeed = 2.945
 
 [node name="MousePointer" type="RigidBody3D" parent="." node_paths=PackedStringArray("controller")]

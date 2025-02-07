@@ -17,6 +17,7 @@ public partial class R3DTestController : RigidBody3D
 	[Export] ComponentRotateToMouse rotateToMouseComponent;
 	[Export] ComponentMove moveComponent;
 	[Export] ComponentHover hoverComponent;
+	[Export] ComponentShooting shootingComponent;
 
 	[Export] Node3D eyeHeightTransform;
 
@@ -28,7 +29,7 @@ public partial class R3DTestController : RigidBody3D
 	public float Acceleration { get { return accel; } set { accel = value; } }
 	public float MaxSpeed { get { return maxSpeed; } }
 	public Vector3 EyeHeight { get { return eyeHeightTransform.GlobalPosition; } }
-	
+
 	public float TargetRestingHeight { get { return targetRestingHeight; } }
 	public float SpringStrength { get { return springStrength; } }
 	public float DampStrength { get { return dampStrength; } }
@@ -58,6 +59,8 @@ public partial class R3DTestController : RigidBody3D
 
 		hoverComponent.playerNode = this;
 		hoverComponent.ForceSignal += AddToMoveForceBuffer;
+
+		shootingComponent.playerNode = this;
 	}
 
 	#endregion

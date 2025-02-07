@@ -85,7 +85,7 @@ public partial class ComponentHover : Node3D
 		var restingOffset = gravityStrength / springStrength;
 		var targetSpringHeight = targetRestingHeight + restingOffset;
 
-		GD.Print(restingOffset, " ", groundDistance);
+		//GD.Print(restingOffset, " ", groundDistance);
 
 		return targetSpringHeight;
 	}

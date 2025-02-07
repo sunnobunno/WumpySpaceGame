@@ -12,7 +12,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_propw"]
 
-[node name="Player" type="RigidBody3D" node_paths=PackedStringArray("rotateToMouseComponent", "moveComponent", "hoverComponent", "eyeHeightTransform")]
+[node name="Player" type="RigidBody3D" node_paths=PackedStringArray("rotateToMouseComponent", "moveComponent", "hoverComponent", "shootingComponent", "eyeHeightTransform")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.43379, 0)
 center_of_mass_mode = 1
 script = ExtResource("1_4rury")
@@ -20,6 +20,7 @@ springStrength = 29.045
 rotateToMouseComponent = NodePath("ComponentRotateToMouse")
 moveComponent = NodePath("ComponentMove")
 hoverComponent = NodePath("ComponentHover")
+shootingComponent = NodePath("ComponentShooting")
 eyeHeightTransform = NodePath("EyeHeight")
 
 [node name="ComponentRotateToMouse" type="Node3D" parent="."]

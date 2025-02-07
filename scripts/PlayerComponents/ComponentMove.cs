@@ -16,20 +16,26 @@ public partial class ComponentMove : Node3D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		MovePlayer();
+		MovePlayer(delta);
 	}
 
-	private void MovePlayer()
+	private void MovePlayer(double delta)
 	{
 		MoveAxisLocal = CaptureMoveInputs();
 		MoveAxisWorld = TranslateLocalMoveAxisToWorld(MoveAxisLocal);
+
 		var force = CalculateMovementForce(MoveAxisWorld,
 			playerNode.Acceleration,
 			playerNode.Mass,
 			playerNode.MaxSpeed,
-			playerNode.LinearVelocity);
+			playerNode.LinearVelocity,
+			delta);
 
-		GD.Print(force);
+        
+
+
+
+		
 
 		EmitSignal(SignalName.ForceSignal, force);
 	}
@@ -48,18 +54,32 @@ public partial class ComponentMove : Node3D
 	}
 
 	private Vector3 CalculateMovementForce(Vector3 direction, float accel,
-		float mass, float maxSpeed, Vector3 linearVelocity)
+		float mass, float maxSpeed, Vector3 currentLinearVelocity,
+		double delta)
 	{
-		var verticalComponentOfLinearVelocity = linearVelocity.Dot(Vector3.Up) * Vector3.Up;
-		linearVelocity -= verticalComponentOfLinearVelocity;
+		var verticalComponentOfLinearVelocity = currentLinearVelocity.Dot(Vector3.Up) * Vector3.Up;
+		currentLinearVelocity -= verticalComponentOfLinearVelocity;
 		
 		var targetVelocity = direction * maxSpeed;
-		var targetDirection = (targetVelocity - linearVelocity).Normalized();
-		
-		var accelVector = targetDirection * accel;
+
+		var targetVelocityDelta = targetVelocity - currentLinearVelocity;
+		var targetDirection = targetVelocityDelta.Normalized();
+		var targetMagnitude = targetVelocityDelta.Length();
+
+
+        var accelVector = targetVelocityDelta * accel;
 		var forceVector = mass * accelVector;
 
-		return forceVector;
+		var directionX = forceVector.Dot(Transform.Basis.X);
+		var directionZ = forceVector.Dot(Transform.Basis.Z);
+
+		//DebugDraw3D.DrawRay(GlobalPosition, currentLinearVelocity, currentLinearVelocity.Length() * 100f);
+        return forceVector;
+	}
+
+	private bool DetectMovementStutter()
+	{
+		return true;
 	}
 
 
