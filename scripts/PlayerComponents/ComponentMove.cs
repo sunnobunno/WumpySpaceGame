@@ -4,6 +4,7 @@ using System;
 public partial class ComponentMove : Node3D
 {
 	[Signal] public delegate void ForceSignalEventHandler(Vector3 force);
+	[Signal] public delegate void ImpulseSignalEventHandler(Vector3 impulse);
 
 	// DEPENDENT PARAMETERS
 	public R3DTestController playerNode { get; set; }
@@ -13,15 +14,19 @@ public partial class ComponentMove : Node3D
 	public Vector3 MoveAxisWorld { get; set; }
 	public bool IsInputPressed { private set; get; }
 
+    public override void _Process(double delta)
+    {
+    }
 
-	public override void _PhysicsProcess(double delta)
+    public override void _PhysicsProcess(double delta)
 	{
 		MovePlayer(delta);
 	}
 
 	private void MovePlayer(double delta)
 	{
-		MoveAxisLocal = CaptureMoveInputs();
+		
+		CaptureMoveInputs();
 		MoveAxisWorld = TranslateLocalMoveAxisToWorld(MoveAxisLocal);
 
 		var force = CalculateMovementForce(MoveAxisWorld,
@@ -31,11 +36,7 @@ public partial class ComponentMove : Node3D
 			playerNode.LinearVelocity,
 			delta);
 
-        
-
-
-
-		
+		if (!playerNode.IsOnGround) force *= 0.15f;
 
 		EmitSignal(SignalName.ForceSignal, force);
 	}
@@ -84,9 +85,10 @@ public partial class ComponentMove : Node3D
 
 
 
-	private Vector3 CaptureMoveInputs()
+	private void CaptureMoveInputs()
 	{
 		var moveAxis = Vector3.Zero;
+		var jumpPressed = false;
 
 		if (Input.IsActionPressed("Up"))
 		{
@@ -108,10 +110,10 @@ public partial class ComponentMove : Node3D
 			moveAxis.X += 1f;
 		}
 
-		if (moveAxis != Vector3.Zero) IsInputPressed = true;
+        if (moveAxis != Vector3.Zero) IsInputPressed = true;
 		else IsInputPressed = false;
 
-		return moveAxis.Normalized();
+		MoveAxisLocal = moveAxis;
 	}
 
 }

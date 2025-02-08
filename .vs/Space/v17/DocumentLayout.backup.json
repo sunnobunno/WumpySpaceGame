@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\docin\\Games\\Godot\\Projects\\WumpySpaceGame\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{92310941-EB3C-4A23-8A18-5E7E93710F02}|Space.csproj|c:\\users\\docin\\games\\godot\\projects\\wumpyspacegame\\scripts\\playercomponents\\componentmove.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{92310941-EB3C-4A23-8A18-5E7E93710F02}|Space.csproj|solutionrelative:scripts\\playercomponents\\componentmove.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{92310941-EB3C-4A23-8A18-5E7E93710F02}|Space.csproj|c:\\users\\docin\\games\\godot\\projects\\wumpyspacegame\\scripts\\playercomponents\\componentshooting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{92310941-EB3C-4A23-8A18-5E7E93710F02}|Space.csproj|solutionrelative:scripts\\playercomponents\\componentshooting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{92310941-EB3C-4A23-8A18-5E7E93710F02}|Space.csproj|c:\\users\\docin\\games\\godot\\projects\\wumpyspacegame\\scripts\\playercomponents\\componenthover.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{92310941-EB3C-4A23-8A18-5E7E93710F02}|Space.csproj|solutionrelative:scripts\\playercomponents\\componenthover.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{92310941-EB3C-4A23-8A18-5E7E93710F02}|Space.csproj|c:\\users\\docin\\games\\godot\\projects\\wumpyspacegame\\scripts\\r3dtestcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{92310941-EB3C-4A23-8A18-5E7E93710F02}|Space.csproj|solutionrelative:scripts\\r3dtestcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{92310941-EB3C-4A23-8A18-5E7E93710F02}|Space.csproj|c:\\users\\docin\\games\\godot\\projects\\wumpyspacegame\\scripts\\playercomponents\\componentmove.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{92310941-EB3C-4A23-8A18-5E7E93710F02}|Space.csproj|solutionrelative:scripts\\playercomponents\\componentmove.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{92310941-EB3C-4A23-8A18-5E7E93710F02}|Space.csproj|c:\\users\\docin\\games\\godot\\projects\\wumpyspacegame\\scripts\\playercomponents\\componentshooting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{92310941-EB3C-4A23-8A18-5E7E93710F02}|Space.csproj|solutionrelative:scripts\\playercomponents\\componentshooting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{92310941-EB3C-4A23-8A18-5E7E93710F02}|Space.csproj|c:\\users\\docin\\games\\godot\\projects\\wumpyspacegame\\scripts\\playercomponents\\componentrotatetomouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -37,6 +37,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{92310941-EB3C-4A23-8A18-5E7E93710F02}|Space.csproj|c:\\users\\docin\\games\\godot\\projects\\wumpyspacegame\\scripts\\test.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{92310941-EB3C-4A23-8A18-5E7E93710F02}|Space.csproj|solutionrelative:scripts\\test.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{92310941-EB3C-4A23-8A18-5E7E93710F02}|Space.csproj|c:\\users\\docin\\games\\godot\\projects\\wumpyspacegame\\scripts\\gunparticlescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{92310941-EB3C-4A23-8A18-5E7E93710F02}|Space.csproj|solutionrelative:scripts\\gunparticlescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -45,18 +49,18 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 142,
-          "SelectedChildIndex": 0,
+          "DockedWidth": 149,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "ComponentShooting.cs",
               "DocumentMoniker": "C:\\Users\\docin\\Games\\Godot\\Projects\\WumpySpaceGame\\scripts\\PlayerComponents\\ComponentShooting.cs",
               "RelativeDocumentMoniker": "scripts\\PlayerComponents\\ComponentShooting.cs",
               "ToolTip": "C:\\Users\\docin\\Games\\Godot\\Projects\\WumpySpaceGame\\scripts\\PlayerComponents\\ComponentShooting.cs",
               "RelativeToolTip": "scripts\\PlayerComponents\\ComponentShooting.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAowCkAAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAAF4AAAAAAAAAAAAYwHIAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-07T00:58:45.589Z",
               "EditorCaption": ""
@@ -75,13 +79,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "R3DTestController.cs",
               "DocumentMoniker": "C:\\Users\\docin\\Games\\Godot\\Projects\\WumpySpaceGame\\scripts\\R3DTestController.cs",
               "RelativeDocumentMoniker": "scripts\\R3DTestController.cs",
               "ToolTip": "C:\\Users\\docin\\Games\\Godot\\Projects\\WumpySpaceGame\\scripts\\R3DTestController.cs",
               "RelativeToolTip": "scripts\\R3DTestController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD4AAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwCEAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-02T02:18:31.512Z",
               "EditorCaption": ""
@@ -125,18 +129,31 @@
           ]
         },
         {
-          "DockedWidth": 160,
-          "SelectedChildIndex": 2,
+          "DockedWidth": 153,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 9,
+              "Title": "GunParticlesController.cs",
+              "DocumentMoniker": "C:\\Users\\docin\\Games\\Godot\\Projects\\WumpySpaceGame\\scripts\\GunParticlesController.cs",
+              "RelativeDocumentMoniker": "scripts\\GunParticlesController.cs",
+              "ToolTip": "C:\\Users\\docin\\Games\\Godot\\Projects\\WumpySpaceGame\\scripts\\GunParticlesController.cs",
+              "RelativeToolTip": "scripts\\GunParticlesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-08T03:07:46.096Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "ComponentHover.cs",
               "DocumentMoniker": "C:\\Users\\docin\\Games\\Godot\\Projects\\WumpySpaceGame\\scripts\\PlayerComponents\\ComponentHover.cs",
               "RelativeDocumentMoniker": "scripts\\PlayerComponents\\ComponentHover.cs",
               "ToolTip": "C:\\Users\\docin\\Games\\Godot\\Projects\\WumpySpaceGame\\scripts\\PlayerComponents\\ComponentHover.cs",
               "RelativeToolTip": "scripts\\PlayerComponents\\ComponentHover.cs",
-              "ViewState": "AgIAADoAAAAAAAAAAAAcwFcAAAAxAAAAAAAAAA==",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAAwHkAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-06T07:13:25.726Z",
               "EditorCaption": ""
@@ -151,18 +168,17 @@
               "RelativeToolTip": "scripts\\PlayerComponents\\ComponentRotateToMouse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-05T18:20:09.899Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-05T18:20:09.899Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "ComponentMove.cs",
               "DocumentMoniker": "C:\\Users\\docin\\Games\\Godot\\Projects\\WumpySpaceGame\\scripts\\PlayerComponents\\ComponentMove.cs",
               "RelativeDocumentMoniker": "scripts\\PlayerComponents\\ComponentMove.cs",
               "ToolTip": "C:\\Users\\docin\\Games\\Godot\\Projects\\WumpySpaceGame\\scripts\\PlayerComponents\\ComponentMove.cs",
               "RelativeToolTip": "scripts\\PlayerComponents\\ComponentMove.cs",
-              "ViewState": "AgIAADgAAAAAAAAAAAAAwB8AAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAwwBoAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-06T06:02:45.717Z",
               "EditorCaption": ""

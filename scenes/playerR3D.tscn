@@ -1,10 +1,23 @@
-[gd_scene load_steps=9 format=3 uid="uid://bqbuk4ndoutim"]
+[gd_scene load_steps=13 format=3 uid="uid://bqbuk4ndoutim"]
 
 [ext_resource type="Script" path="res://scripts/R3DTestController.cs" id="1_4rury"]
 [ext_resource type="Script" path="res://scripts/PlayerComponents/ComponentRotateToMouse.cs" id="2_c68xh"]
 [ext_resource type="Script" path="res://scripts/PlayerComponents/ComponentMove.cs" id="3_by2to"]
 [ext_resource type="Script" path="res://scripts/PlayerComponents/ComponentHover.cs" id="4_rki4u"]
 [ext_resource type="Script" path="res://scripts/PlayerComponents/ComponentShooting.cs" id="5_2e6t2"]
+[ext_resource type="AudioStream" uid="uid://df1ba1ent05ov" path="res://sounds/weapons/476741__cjdeets__shotscifipowerdownbuildshorthighs.wav" id="6_ojjys"]
+[ext_resource type="Shader" path="res://shaders/outline.gdshader" id="7_a5uvq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1t887"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hdvle"]
+render_priority = 0
+next_pass = SubResource("StandardMaterial3D_1t887")
+shader = ExtResource("7_a5uvq")
+shader_parameter/outline_color = null
+shader_parameter/outline_width = 5.0
+shader_parameter/fade_start = 100.0
+shader_parameter/fade_end = 100.0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_3ebml"]
 
@@ -12,7 +25,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_propw"]
 
-[node name="Player" type="RigidBody3D" node_paths=PackedStringArray("rotateToMouseComponent", "moveComponent", "hoverComponent", "shootingComponent", "eyeHeightTransform")]
+[node name="Player" type="RigidBody3D" node_paths=PackedStringArray("rotateToMouseComponent", "moveComponent", "hoverComponent", "shootingComponent", "eyeHeightTransform", "gunTip")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.43379, 0)
 center_of_mass_mode = 1
 script = ExtResource("1_4rury")
@@ -22,6 +35,7 @@ moveComponent = NodePath("ComponentMove")
 hoverComponent = NodePath("ComponentHover")
 shootingComponent = NodePath("ComponentShooting")
 eyeHeightTransform = NodePath("EyeHeight")
+gunTip = NodePath("GunTip")
 
 [node name="ComponentRotateToMouse" type="Node3D" parent="."]
 script = ExtResource("2_c68xh")
@@ -32,12 +46,23 @@ script = ExtResource("3_by2to")
 [node name="ComponentHover" type="Node3D" parent="."]
 script = ExtResource("4_rki4u")
 
-[node name="ComponentShooting" type="Node3D" parent="."]
+[node name="ComponentShooting" type="Node3D" parent="." node_paths=PackedStringArray("audioPlayer")]
 script = ExtResource("5_2e6t2")
+audioPlayer = NodePath("AudioStreamPlayer3D")
+gunShotAudio = ExtResource("6_ojjys")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="ComponentShooting"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.463356, 0.58966)
+stream = ExtResource("6_ojjys")
+max_polyphony = 4
+emission_angle_enabled = true
+emission_angle_degrees = 84.2
+emission_angle_filter_attenuation_db = -4.3
 
 [node name="Model" type="Node3D" parent="."]
 
 [node name="Body" type="MeshInstance3D" parent="Model"]
+material_override = SubResource("ShaderMaterial_hdvle")
 mesh = SubResource("CapsuleMesh_3ebml")
 skeleton = NodePath("")
 
@@ -48,6 +73,9 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_propw")
+
+[node name="GunTip" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.461253, 0.830048)
 
 [node name="EyeHeight" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.461253, 0)

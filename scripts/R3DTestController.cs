@@ -13,6 +13,7 @@ public partial class R3DTestController : RigidBody3D
 	[Export] float dampStrength = 5f;
 	[Export] float accel = 1f;
 	[Export] float maxSpeed = 2f;
+	[Export] float jumpStrength = 5f;
 
 	[Export] ComponentRotateToMouse rotateToMouseComponent;
 	[Export] ComponentMove moveComponent;
@@ -20,19 +21,24 @@ public partial class R3DTestController : RigidBody3D
 	[Export] ComponentShooting shootingComponent;
 
 	[Export] Node3D eyeHeightTransform;
+	[Export] Node3D gunTip;
 
 	Vector3 torqueBuffer;
-	Vector3 moveForceBuffer;
+	Vector3 linearForceBuffer;
+	Vector3 linearImpulseBuffer;
 
 
 	// PUBLIC PARAMETERS
 	public float Acceleration { get { return accel; } set { accel = value; } }
 	public float MaxSpeed { get { return maxSpeed; } }
+	public float JumpStrength { get { return jumpStrength; } }
 	public Vector3 EyeHeight { get { return eyeHeightTransform.GlobalPosition; } }
+	public Node3D GunTip { get { return gunTip; } }
 
 	public float TargetRestingHeight { get { return targetRestingHeight; } }
 	public float SpringStrength { get { return springStrength; } }
 	public float DampStrength { get { return dampStrength; } }
+	public bool IsOnGround { get { return hoverComponent.IsOnGround; } }
 
 
 	#region Initialization
@@ -55,12 +61,14 @@ public partial class R3DTestController : RigidBody3D
 		rotateToMouseComponent.TorqueSignal += AddToTorqueBuffer;
 
 		moveComponent.playerNode = this;
-		moveComponent.ForceSignal += AddToMoveForceBuffer;
+		moveComponent.ForceSignal += AddToLinearForceBuffer;
 
 		hoverComponent.playerNode = this;
-		hoverComponent.ForceSignal += AddToMoveForceBuffer;
+		hoverComponent.ForceSignal += AddToLinearForceBuffer;
+		hoverComponent.ImpulseSignal += AddToLinearImuplseBuffer;
 
 		shootingComponent.playerNode = this;
+		shootingComponent.ImpulseSignal += AddToLinearImuplseBuffer;
 	}
 
 	#endregion
@@ -76,8 +84,9 @@ public partial class R3DTestController : RigidBody3D
 	{
 		//GD.Print(GlobalPosition);
 
-		ApplyMoveForceBuffer(state);
+		ApplyLinearForceBuffer(state);
 		ApplyTorqueBuffer(state);
+		ApplyLinearImpulseBuffer(state);
 	}
 
 	#endregion
@@ -98,16 +107,28 @@ public partial class R3DTestController : RigidBody3D
 	}
 
 	// MOVEMENT
-	private void ApplyMoveForceBuffer(PhysicsDirectBodyState3D state)
+	private void ApplyLinearForceBuffer(PhysicsDirectBodyState3D state)
 	{
-		state.ApplyForce(moveForceBuffer);
+		state.ApplyForce(linearForceBuffer);
 
-		moveForceBuffer = Vector3.Zero;
+		linearForceBuffer = Vector3.Zero;
 	}
 
-	public void AddToMoveForceBuffer(Vector3 force)
+	public void AddToLinearForceBuffer(Vector3 force)
 	{
-		moveForceBuffer += force;
+		linearForceBuffer += force;
+	}
+
+	private void ApplyLinearImpulseBuffer(PhysicsDirectBodyState3D state)
+	{
+		state.ApplyImpulse(linearImpulseBuffer);
+
+		linearImpulseBuffer = Vector3.Zero;
+	}
+
+	public void AddToLinearImuplseBuffer(Vector3 impulse)
+	{
+		linearImpulseBuffer += impulse;
 	}
 
 	#endregion

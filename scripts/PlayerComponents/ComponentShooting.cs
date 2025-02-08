@@ -3,7 +3,17 @@ using System;
 
 public partial class ComponentShooting : Node3D
 {
-	private PhysicsDirectSpaceState3D world;
+    [Signal] public delegate void ImpulseSignalEventHandler(Vector3 force);
+
+	[Export] AudioStreamPlayer3D audioPlayer;
+	[Export] AudioStream gunShotAudio;
+
+	private PackedScene gunParticles;
+
+    private PhysicsDirectSpaceState3D world;
+	private bool shoot = false;
+
+	private RandomNumberGenerator rng;
 
     // DEPENDENT PARAMETERS
     public R3DTestController playerNode { get; set; }
@@ -11,14 +21,42 @@ public partial class ComponentShooting : Node3D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
+		gunParticles = GD.Load<PackedScene>("res://scenes/gunParticles.tscn");
+		rng = new RandomNumberGenerator();
 	}
 
-	public override void _PhysicsProcess(double delta)
+    public override void _Process(double delta)
+    {
+		shoot = CaptureShootingInputs();
+
+		if (shoot)
+		{
+            FireWeapon();
+        }
+    }
+
+    public override void _PhysicsProcess(double delta)
 	{
-		world = GetWorld3D().DirectSpaceState;
-		var rayQuery = GenerateShootingRay();
-		CastShootingRay(rayQuery);
+		
 	}
+
+	private void FireWeapon()
+	{
+		
+		
+		world = GetWorld3D().DirectSpaceState;
+        var rayQuery = GenerateShootingRay();
+        CastShootingRay(rayQuery);
+
+		var forwardDirection = playerNode.Transform.Basis.Z;
+		var recoilImpulse = CalculateBackwardForce(10f, forwardDirection);
+		EmitSignal(SignalName.ImpulseSignal, recoilImpulse);
+
+		InstantiateShootingParticles();
+		PlayGunShot();
+
+        GD.Print(recoilImpulse);
+    }
 
 	private PhysicsRayQueryParameters3D GenerateShootingRay()
 	{
@@ -29,6 +67,14 @@ public partial class ComponentShooting : Node3D
 
 		return rayQuery;
     }
+
+	private Vector3 CalculateBackwardForce(float strength, Vector3 forwardDirection)
+	{
+		var backwardDirection = forwardDirection * -1f;
+		var backwardForce = backwardDirection.Normalized() * strength;
+
+		return backwardForce;
+	}
 
 	private void CastShootingRay(PhysicsRayQueryParameters3D rayQuery)
 	{
@@ -43,4 +89,33 @@ public partial class ComponentShooting : Node3D
         }
     }
 
+
+
+	private bool CaptureShootingInputs()
+	{
+		var shootPressed = false;
+
+		if (Input.IsActionJustPressed("Shoot"))
+		{
+			shootPressed = true;
+		}
+
+		return shootPressed;
+	}
+
+
+	private void InstantiateShootingParticles()
+	{
+		var instance = gunParticles.Instantiate();
+		playerNode.GunTip.AddChild(instance);
+	}
+
+	private void PlayGunShot()
+	{
+		var pitch = rng.RandfRange(0.8f, 1.2f);
+		
+		audioPlayer.Stream = gunShotAudio;
+		audioPlayer.PitchScale = pitch;
+		audioPlayer.Play(0.2f);
+	}
 }

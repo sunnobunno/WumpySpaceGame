@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://dicf834xug640"]
+
+[ext_resource type="Script" path="res://scripts/GunParticlesController.cs" id="1_ylaf8"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0ykyo"]
+lifetime_randomness = 0.4
+particle_flag_align_y = true
+angle_min = 1.07288e-05
+angle_max = 1.07288e-05
+direction = Vector3(0, 0, 1)
+spread = 6.667
+initial_velocity_min = 46.67
+initial_velocity_max = 68.89
+scale_max = 1.5
+hue_variation_min = -2.23517e-08
+hue_variation_max = -2.23517e-08
+turbulence_noise_strength = 0.1
+turbulence_noise_scale = 10.0
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.028
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6w4cv"]
+top_radius = 0.02
+bottom_radius = 0.02
+height = 0.3
+
+[node name="GunParticles" type="Node3D" node_paths=PackedStringArray("particles")]
+script = ExtResource("1_ylaf8")
+particles = NodePath("GunParticleEmitter")
+
+[node name="GunParticleEmitter" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 12
+one_shot = true
+explosiveness = 1.0
+visibility_aabb = AABB(-4, -4, -0.675, 8, 8, 8)
+process_material = SubResource("ParticleProcessMaterial_0ykyo")
+draw_pass_1 = SubResource("CylinderMesh_6w4cv")

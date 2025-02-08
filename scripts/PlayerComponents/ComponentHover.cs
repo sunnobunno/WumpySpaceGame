@@ -4,12 +4,20 @@ using System;
 public partial class ComponentHover : Node3D
 {
 	[Signal] public delegate void ForceSignalEventHandler(Vector3 force);
+    [Signal] public delegate void ImpulseSignalEventHandler(Vector3 impulse);
 
-	private PhysicsDirectSpaceState3D world;
+    private PhysicsDirectSpaceState3D world;
 	private float groundDistance;
+	private bool jumpPressed = false;
 
 	public R3DTestController playerNode { get; set; }
 
+	public bool IsOnGround { get
+		{
+			if (groundDistance > playerNode.TargetRestingHeight) return false;
+			else return true;
+        }
+	}
 	
 
 	// Called when the node enters the scene tree for the first time.
@@ -20,6 +28,8 @@ public partial class ComponentHover : Node3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		CaptureJumpInput();
+		Jump();
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -27,7 +37,7 @@ public partial class ComponentHover : Node3D
 		world = GetWorld3D().DirectSpaceState;
 		CastGroundRay();
 
-        if (groundDistance > playerNode.TargetRestingHeight) return;
+        if (!IsOnGround) return;
 
         var targetSpringHeight = CalculateDesiredSpringHeight(
 			playerNode.TargetRestingHeight,
@@ -89,4 +99,29 @@ public partial class ComponentHover : Node3D
 
 		return targetSpringHeight;
 	}
+
+
+	private void CaptureJumpInput()
+	{
+		var jumpPressed = false;
+
+        if (Input.IsActionJustPressed("Jump"))
+        {
+            jumpPressed = true;
+        }
+
+		this.jumpPressed = jumpPressed;
+    }
+
+    private void Jump()
+    {
+        if (jumpPressed && IsOnGround)
+        {
+            var direction = Vector3.Up;
+            var jumpStrength = playerNode.JumpStrength;
+            var jumpForce = direction * jumpStrength;
+
+            EmitSignal(SignalName.ImpulseSignal, jumpForce);
+        }
+    }
 }
