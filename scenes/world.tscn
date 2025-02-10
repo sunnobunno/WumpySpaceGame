@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b22e2cxtfkc7e"]
+[gd_scene load_steps=12 format=3 uid="uid://b22e2cxtfkc7e"]
 
 [ext_resource type="PackedScene" uid="uid://bqbuk4ndoutim" path="res://scenes/playerR3D.tscn" id="1_6240u"]
 [ext_resource type="Script" path="res://scripts/MouseRaycaster.cs" id="1_jnwm7"]
@@ -6,8 +6,15 @@
 [ext_resource type="Script" path="res://scripts/CameraDolly.cs" id="1_q207n"]
 [ext_resource type="Script" path="res://scripts/Test.cs" id="3_sa5vb"]
 [ext_resource type="PackedScene" uid="uid://cmhwjx2mc7ibw" path="res://scenes/living_quarters.tscn" id="5_21m8y"]
+[ext_resource type="PackedScene" uid="uid://cprqec67vvrts" path="res://models/environment/floor_01.tscn" id="7_vsj1a"]
+[ext_resource type="Shader" uid="uid://rsadvjrgb4sq" path="res://shaders/pixelate.res" id="8_kqjgu"]
+[ext_resource type="Texture2D" uid="uid://tqqiu8l5ysgh" path="res://icon.svg" id="9_524xd"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_1dbo8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_35tjq"]
+shader = ExtResource("8_kqjgu")
+shader_parameter/Pixelization = 256.0
 
 [node name="World" type="Node3D"]
 
@@ -195,3 +202,59 @@ spot_range = 5.05439
 spot_attenuation = 0.68
 spot_angle = 73.6356
 spot_angle_attenuation = 1.23114
+
+[node name="Floors" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 4)
+
+[node name="floor01" parent="Floors" instance=ExtResource("7_vsj1a")]
+
+[node name="floor02" parent="Floors" instance=ExtResource("7_vsj1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[node name="floor03" parent="Floors" instance=ExtResource("7_vsj1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+
+[node name="floor04" parent="Floors" instance=ExtResource("7_vsj1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
+
+[node name="floor05" parent="Floors" instance=ExtResource("7_vsj1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -12)
+
+[node name="floor06" parent="Floors" instance=ExtResource("7_vsj1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -8)
+
+[node name="floor07" parent="Floors" instance=ExtResource("7_vsj1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
+
+[node name="floor08" parent="Floors" instance=ExtResource("7_vsj1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="floor09" parent="Floors" instance=ExtResource("7_vsj1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+
+[node name="floor10" parent="Floors" instance=ExtResource("7_vsj1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -4)
+
+[node name="floor11" parent="Floors" instance=ExtResource("7_vsj1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -8)
+
+[node name="floor12" parent="Floors" instance=ExtResource("7_vsj1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -12)
+
+[node name="floor13" parent="Floors" instance=ExtResource("7_vsj1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -12)
+
+[node name="floor14" parent="Floors" instance=ExtResource("7_vsj1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -8)
+
+[node name="floor15" parent="Floors" instance=ExtResource("7_vsj1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -4)
+
+[node name="floor16" parent="Floors" instance=ExtResource("7_vsj1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_35tjq")
+scale = Vector2(9, 5.0625)
+texture = ExtResource("9_524xd")
+centered = false
