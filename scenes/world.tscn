@@ -1,39 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://b22e2cxtfkc7e"]
+[gd_scene load_steps=8 format=3 uid="uid://b22e2cxtfkc7e"]
 
 [ext_resource type="PackedScene" uid="uid://bqbuk4ndoutim" path="res://scenes/playerR3D.tscn" id="1_6240u"]
 [ext_resource type="Script" path="res://scripts/MouseRaycaster.cs" id="1_jnwm7"]
 [ext_resource type="Script" path="res://scripts/CameraController.cs" id="1_l7yrf"]
 [ext_resource type="Script" path="res://scripts/CameraDolly.cs" id="1_q207n"]
 [ext_resource type="Script" path="res://scripts/Test.cs" id="3_sa5vb"]
-[ext_resource type="PackedScene" uid="uid://cmhwjx2mc7ibw" path="res://scenes/living_quarters.tscn" id="5_21m8y"]
-[ext_resource type="PackedScene" uid="uid://cprqec67vvrts" path="res://models/environment/floor_01.tscn" id="7_vsj1a"]
-[ext_resource type="Shader" uid="uid://rsadvjrgb4sq" path="res://shaders/pixelate.res" id="8_kqjgu"]
-[ext_resource type="Texture2D" uid="uid://tqqiu8l5ysgh" path="res://icon.svg" id="9_524xd"]
+[ext_resource type="PackedScene" uid="uid://c3s2mertjyvyv" path="res://scenes/living_quarters_2.tscn" id="6_8j0y5"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_1dbo8"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_35tjq"]
-shader = ExtResource("8_kqjgu")
-shader_parameter/Pixelization = 256.0
-
 [node name="World" type="Node3D"]
-
-[node name="CameraDolly" type="Node3D" parent="." node_paths=PackedStringArray("followNode")]
-script = ExtResource("1_q207n")
-followNode = NodePath("../Player")
-acceleration = 1.495
-
-[node name="Camera3D" type="Camera3D" parent="CameraDolly" groups=["Camera"]]
-transform = Transform3D(0.717545, -0.29702, 0.630007, -3.72529e-09, 0.904517, 0.426438, -0.696513, -0.305989, 0.649031, 7.77655, 6.30053, 7.39391)
-projection = 1
-fov = 23.0
-size = 11.725
-script = ExtResource("1_l7yrf")
-rotX = -29.85
-
-[node name="MouseRaycaster" type="Node3D" parent="CameraDolly/Camera3D" node_paths=PackedStringArray("camera3D")]
-script = ExtResource("1_jnwm7")
-camera3D = NodePath("..")
 
 [node name="Player" parent="." groups=["Player"] instance=ExtResource("1_6240u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 1.434, 0)
@@ -48,7 +24,6 @@ maxSpeed = 3.35
 
 [node name="MousePointer" type="RigidBody3D" parent="." node_paths=PackedStringArray("controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.64927, 0.751382, 2.91959)
-visible = false
 gravity_scale = 0.0
 can_sleep = false
 script = ExtResource("3_sa5vb")
@@ -58,14 +33,12 @@ controller = NodePath("../Player")
 transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
 mesh = SubResource("SphereMesh_1dbo8")
 
-[node name="LivingQuarters" parent="." instance=ExtResource("5_21m8y")]
-
 [node name="Lights" type="Node3D" parent="."]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights"]
 transform = Transform3D(0.370125, 0.91828, -0.140601, -0.294296, 0.259457, 0.919822, 0.881134, -0.299071, 0.366278, 0, 4.83195, -6.27185)
 light_color = Color(0.887173, 1, 0.91143, 1)
-light_energy = 0.613
+light_energy = 0.097
 shadow_enabled = true
 shadow_transmittance_bias = -5.369
 shadow_blur = 1.323
@@ -93,7 +66,7 @@ spot_angle = 77.7984
 spot_angle_attenuation = 1.23114
 
 [node name="SpotLight3D5" type="SpotLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -15.0795, 4.04316, -17.9595)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -22.9269, 4.04316, -13.5414)
 light_color = Color(0.576933, 0.490309, 1.92523e-07, 1)
 light_energy = 10.806
 light_indirect_energy = 1.83
@@ -104,7 +77,7 @@ spot_angle = 77.7984
 spot_angle_attenuation = 1.23114
 
 [node name="SpotLight3D6" type="SpotLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.749724, 4.04316, -17.6809)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -2.36644, 4.04316, -22.1821)
 light_color = Color(0.482706, 0.525579, 0.15874, 1)
 light_energy = 10.806
 light_indirect_energy = 1.83
@@ -115,7 +88,7 @@ spot_angle = 77.7984
 spot_angle_attenuation = 1.23114
 
 [node name="SpotLight3D7" type="SpotLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 11.6812, 4.04316, -17.8692)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 11.6812, 4.04316, -0.327564)
 light_color = Color(0.576933, 0.490309, 1.92523e-07, 1)
 light_energy = 10.806
 light_indirect_energy = 1.83
@@ -126,7 +99,18 @@ spot_angle = 77.7984
 spot_angle_attenuation = 1.23114
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="Lights"]
-transform = Transform3D(-0.240585, 0.948734, -0.204993, 0.559122, 0.308097, 0.769713, 0.793411, 0.0705656, -0.604582, -8.81916, 3.41953, -8.18051)
+transform = Transform3D(-0.240585, 0.948734, -0.204993, 0.559122, 0.308097, 0.769713, 0.793411, 0.0705655, -0.604582, -12.9064, 3.41953, -8.76101)
+light_color = Color(1, 0.690895, 0.622484, 1)
+light_energy = 10.806
+light_indirect_energy = 1.83
+shadow_enabled = true
+spot_range = 5.05439
+spot_attenuation = 0.68
+spot_angle = 58.85
+spot_angle_attenuation = 1.23114
+
+[node name="SpotLight3D15" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(-0.240585, 0.948734, -0.204993, 0.559122, 0.308097, 0.769713, 0.793411, 0.0705655, -0.604582, -2.06328, 3.41953, -8.76101)
 light_color = Color(1, 0.690895, 0.622484, 1)
 light_energy = 10.806
 light_indirect_energy = 1.83
@@ -137,7 +121,18 @@ spot_angle = 58.85
 spot_angle_attenuation = 1.23114
 
 [node name="SpotLight3D8" type="SpotLight3D" parent="Lights"]
-transform = Transform3D(-0.240585, 0.948734, -0.204993, 0.559122, 0.308097, 0.769713, 0.793411, 0.0705655, -0.604582, -8.52756, 3.41953, -22.1288)
+transform = Transform3D(-0.240585, 0.948734, -0.204993, 0.559122, 0.308097, 0.769713, 0.793411, 0.0705654, -0.604582, -10.9203, 3.41953, -25.6441)
+light_color = Color(1, 0.690895, 0.622484, 1)
+light_energy = 10.806
+light_indirect_energy = 1.83
+shadow_enabled = true
+spot_range = 5.05439
+spot_attenuation = 0.68
+spot_angle = 58.85
+spot_angle_attenuation = 1.23114
+
+[node name="SpotLight3D14" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(-0.240585, 0.948734, -0.204993, 0.559122, 0.308097, 0.769713, 0.793411, 0.0705654, -0.604582, -24.3468, 3.41953, -25.6441)
 light_color = Color(1, 0.690895, 0.622484, 1)
 light_energy = 10.806
 light_indirect_energy = 1.83
@@ -148,7 +143,7 @@ spot_angle = 58.85
 spot_angle_attenuation = 1.23114
 
 [node name="SpotLight3D12" type="SpotLight3D" parent="Lights"]
-transform = Transform3D(-0.240585, 0.948734, -0.204993, 0.559122, 0.308097, 0.769713, 0.793411, 0.0705655, -0.604582, 8.97651, 3.41953, -22.1706)
+transform = Transform3D(-0.240585, 0.948734, -0.204993, 0.559122, 0.308097, 0.769713, 0.793411, 0.0705654, -0.604582, 8.97651, 3.41953, -25.9428)
 light_color = Color(1, 0.690895, 0.622484, 1)
 light_energy = 10.806
 light_indirect_energy = 1.83
@@ -159,7 +154,18 @@ spot_angle = 58.85
 spot_angle_attenuation = 1.23114
 
 [node name="SpotLight3D9" type="SpotLight3D" parent="Lights"]
-transform = Transform3D(0.920982, 0, -0.389606, 0.389606, -4.37114e-08, 0.920982, -1.70302e-08, -1, -4.02574e-08, -22.8216, 3.41953, -14.0489)
+transform = Transform3D(0.920982, 2.12679e-14, -0.389606, 0.389606, -4.37114e-08, 0.920982, -1.70302e-08, -1, -4.02574e-08, -30.6923, 3.41953, -14.0489)
+light_color = Color(1, 0.690895, 0.622484, 1)
+light_energy = 10.806
+light_indirect_energy = 1.83
+shadow_enabled = true
+spot_range = 5.05439
+spot_attenuation = 0.68
+spot_angle = 58.85
+spot_angle_attenuation = 1.23114
+
+[node name="SpotLight3D13" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(0.920982, 1.96319e-14, -0.389606, 0.389606, -4.37114e-08, 0.920982, -1.70302e-08, -1, -4.02574e-08, -30.6923, 3.41953, -21.2275)
 light_color = Color(1, 0.690895, 0.622484, 1)
 light_energy = 10.806
 light_indirect_energy = 1.83
@@ -170,14 +176,14 @@ spot_angle = 58.85
 spot_angle_attenuation = 1.23114
 
 [node name="SpotLight3D10" type="SpotLight3D" parent="Lights"]
-transform = Transform3D(0.920982, 0, -0.389606, 0.389606, -4.37114e-08, 0.920982, -1.70302e-08, -1, -4.02574e-08, -22.932, 3.41953, -6.86846)
+transform = Transform3D(0.920982, 2.12679e-14, -0.389606, 0.389606, -4.37114e-08, 0.920982, -1.70302e-08, -1, -4.02574e-08, -30.5905, 3.41953, -6.86846)
 light_color = Color(1, 0.690895, 0.622484, 1)
 light_energy = 10.806
 light_indirect_energy = 1.83
 shadow_enabled = true
 spot_range = 5.05439
 spot_attenuation = 0.68
-spot_angle = 58.85
+spot_angle = 58.1297
 spot_angle_attenuation = 1.23114
 
 [node name="SpotLight3D11" type="SpotLight3D" parent="Lights"]
@@ -203,58 +209,38 @@ spot_attenuation = 0.68
 spot_angle = 73.6356
 spot_angle_attenuation = 1.23114
 
-[node name="Floors" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 4)
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 2
 
-[node name="floor01" parent="Floors" instance=ExtResource("7_vsj1a")]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+audio_listener_enable_3d = true
+size = Vector2i(576, 324)
+render_target_update_mode = 4
 
-[node name="floor02" parent="Floors" instance=ExtResource("7_vsj1a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+[node name="CameraDolly" type="Node3D" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("followNode")]
+script = ExtResource("1_q207n")
+followNode = NodePath("../../../Player")
+acceleration = 1.495
 
-[node name="floor03" parent="Floors" instance=ExtResource("7_vsj1a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/CameraDolly" groups=["Camera"]]
+transform = Transform3D(0.717545, -0.29702, 0.630007, -3.72529e-09, 0.904517, 0.426438, -0.696513, -0.305989, 0.649031, 12.8166, 9.71203, 12.5862)
+projection = 1
+fov = 23.0
+size = 11.725
+script = ExtResource("1_l7yrf")
+rotX = -29.85
 
-[node name="floor04" parent="Floors" instance=ExtResource("7_vsj1a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
+[node name="MouseRaycaster" type="Node3D" parent="SubViewportContainer/SubViewport/CameraDolly/Camera3D" node_paths=PackedStringArray("camera3D")]
+script = ExtResource("1_jnwm7")
+camera3D = NodePath("..")
 
-[node name="floor05" parent="Floors" instance=ExtResource("7_vsj1a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -12)
-
-[node name="floor06" parent="Floors" instance=ExtResource("7_vsj1a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -8)
-
-[node name="floor07" parent="Floors" instance=ExtResource("7_vsj1a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
-
-[node name="floor08" parent="Floors" instance=ExtResource("7_vsj1a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
-
-[node name="floor09" parent="Floors" instance=ExtResource("7_vsj1a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
-
-[node name="floor10" parent="Floors" instance=ExtResource("7_vsj1a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -4)
-
-[node name="floor11" parent="Floors" instance=ExtResource("7_vsj1a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -8)
-
-[node name="floor12" parent="Floors" instance=ExtResource("7_vsj1a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -12)
-
-[node name="floor13" parent="Floors" instance=ExtResource("7_vsj1a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -12)
-
-[node name="floor14" parent="Floors" instance=ExtResource("7_vsj1a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -8)
-
-[node name="floor15" parent="Floors" instance=ExtResource("7_vsj1a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -4)
-
-[node name="floor16" parent="Floors" instance=ExtResource("7_vsj1a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_35tjq")
-scale = Vector2(9, 5.0625)
-texture = ExtResource("9_524xd")
-centered = false
+[node name="Living Quarters2" parent="." instance=ExtResource("6_8j0y5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -1)

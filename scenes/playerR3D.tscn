@@ -15,7 +15,7 @@ render_priority = 0
 next_pass = SubResource("StandardMaterial3D_1t887")
 shader = ExtResource("7_a5uvq")
 shader_parameter/outline_color = null
-shader_parameter/outline_width = 5.0
+shader_parameter/outline_width = 2.0
 shader_parameter/fade_start = 100.0
 shader_parameter/fade_end = 100.0
 
