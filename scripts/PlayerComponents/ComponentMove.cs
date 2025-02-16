@@ -18,7 +18,7 @@ public partial class ComponentMove : Node3D
     {
     }
 
-    public override void _PhysicsProcess(double delta)
+    public void PhysicsProcess(double delta)
 	{
 		MovePlayer(delta);
 	}

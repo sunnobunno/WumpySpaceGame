@@ -32,7 +32,7 @@ public partial class ComponentHover : Node3D
 		Jump();
 	}
 
-	public override void _PhysicsProcess(double delta)
+	public void PhysicsProcess(double delta)
 	{
 		world = GetWorld3D().DirectSpaceState;
 		CastGroundRay();

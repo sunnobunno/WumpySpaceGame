@@ -19,7 +19,7 @@ public partial class ComponentRotateToMouse : Node3D
 
 	}
 
-	public override void _PhysicsProcess(double delta)
+	public void PhysicsProcess(double delta)
 	{
 		var mouseLookDirection = GetMouseLookDirection();
 		var torque = GetTorqueToRotateToDirection(mouseLookDirection, delta);

@@ -9,7 +9,6 @@ albedo_color = Color(0.564532, 0.601101, 0.521494, 1)
 [node name="LivingQuarters" type="Node3D"]
 
 [node name="Walls" type="CSGCombiner3D" parent="."]
-visible = false
 use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Walls"]
@@ -67,7 +66,6 @@ operation = 2
 size = Vector3(6.10122, 3.712, 3.08993)
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
-visible = false
 material_override = SubResource("StandardMaterial3D_2asaa")
 use_collision = true
 
@@ -128,6 +126,7 @@ transform = Transform3D(0.846026, -0.533142, 0, 0.533142, 0.846026, 0, 0, 0, 1, 
 size = Vector3(7.47273, 2.33105, 4.63953)
 
 [node name="Walls2" type="Node3D" parent="."]
+visible = false
 
 [node name="wall01" parent="Walls2" instance=ExtResource("1_l2k7q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -8)
@@ -247,6 +246,7 @@ transform = Transform3D(-2.18557e-07, 0, -1, 0, 1, 0, 1, 0, -2.18557e-07, 6, 0, 
 transform = Transform3D(-2.18557e-07, 0, -1, 0, 1, 0, 1, 0, -2.18557e-07, 6, 0, -7)
 
 [node name="Floors" type="Node3D" parent="."]
+visible = false
 
 [node name="floor01" parent="Floors" instance=ExtResource("2_ngj2w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -7)
@@ -340,3 +340,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 1)
 
 [node name="floor12" parent="Floors" instance=ExtResource("2_ngj2w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 5)
+
+[node name="CSGCombiner3D2" type="CSGCombiner3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D2"]
+transform = Transform3D(4.3451, 0, 0, 0, 1, 0, 0, 0, 4.05121, -5, 1.43262, 12)
+size = Vector3(1, 3.86523, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.96114, 1.93618, 12.0099)
+operation = 2
+size = Vector3(4.05286, 3.31299, 3.67847)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.72335, 1.81147, 12.1948)
+operation = 2
+size = Vector3(1, 2.69141, 1)

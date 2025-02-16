@@ -27,6 +27,7 @@ public partial class R3DTestController : RigidBody3D
 	Vector3 linearForceBuffer;
 	Vector3 linearImpulseBuffer;
 
+	double physDelta = 0f;
 
 	// PUBLIC PARAMETERS
 	public float Acceleration { get { return accel; } set { accel = value; } }
@@ -77,14 +78,18 @@ public partial class R3DTestController : RigidBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
-
+		physDelta = delta;
 	}
 
 	public override void _IntegrateForces(PhysicsDirectBodyState3D state)
 	{
 		//GD.Print(GlobalPosition);
 
-		ApplyLinearForceBuffer(state);
+		rotateToMouseComponent.PhysicsProcess(physDelta);
+		moveComponent.PhysicsProcess(physDelta);
+        hoverComponent.PhysicsProcess(physDelta);
+
+        ApplyLinearForceBuffer(state);
 		ApplyTorqueBuffer(state);
 		ApplyLinearImpulseBuffer(state);
 	}
